@@ -38,6 +38,7 @@ This sample demonstrates a ASP.NET web app application that authenticates users 
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)
 - An **Azure AD** tenant. For more information see: [How to get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/quickstart-create-new-tenant)
 - A user account in your **Azure AD** tenant.
+- [Azure AD B2C Configuration platform with Policies - User flows/Custome Domain](https://docs.google.com/document/d/1kUDpWYScBSeUu23pqcpGyj7T7UKdd-r9SkJIlrHWoas/edit?usp=sharing) 
 
 ## Setup
 
