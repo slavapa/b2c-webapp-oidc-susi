@@ -36,7 +36,7 @@ namespace WebApp_OpenIDConnect_DotNet_B2C
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
             // Configure OpenID Connect middleware for each policy
-            //app.UseOpenIdConnectAuthentication(CreateOptionsFromPolicy(PasswordResetPolicyId));
+            app.UseOpenIdConnectAuthentication(CreateOptionsFromPolicy(PasswordResetPolicyId));
             app.UseOpenIdConnectAuthentication(CreateOptionsFromPolicy(SusiPolicyId));
 
         }
@@ -79,9 +79,7 @@ namespace WebApp_OpenIDConnect_DotNet_B2C
             {
                 // For each policy, give OWIN the policy-specific metadata address, and
                 // set the authentication type to the id of the policy
-                //MetadataAddress = String.Format(aadInstance, tenant, policy),
-                MetadataAddress = "https://asteasl.b2clogin.com/asteasl.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_ASTEASL_SignupSignIn_Policy",
-
+                MetadataAddress = String.Format(aadInstance, tenant, policy),
                 AuthenticationType = policy,
 
                 // These are standard OpenID Connect parameters, with values pulled from web.config
@@ -93,17 +91,13 @@ namespace WebApp_OpenIDConnect_DotNet_B2C
                     AuthenticationFailed = AuthenticationFailed,
                     SecurityTokenValidated = OnSecurityTokenValidated,
                 },
-                Scope = OpenIdConnectScopes.OpenIdProfile,
-                ResponseType = OpenIdConnectResponseTypes.CodeIdToken,
+                Scope = "openid",
+                ResponseType = "id_token",
 
-                // ValidateIssuer set to false to allow personal and work accounts from any organization to sign in to your application
-                // To only allow users from a single organizations, set ValidateIssuer to true and 'tenant' setting in web.config to the tenant name
-                // To allow users from only a list of specific organizations, set ValidateIssuer to true and use ValidIssuers parameter
-                               // This piece is optional - it is used for displaying the user's name in the navigation bar.
+                // This piece is optional - it is used for displaying the user's name in the navigation bar.
                 TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = "name",
-                    ValidateIssuer = false // This is a simplification
                 },
             };
         }
